@@ -2,6 +2,7 @@ package ca.siva.ds.trees;
 
 import java.util.ArrayList;
 
+// Time Complexity: O(logn), space: O(1)
 public class NextInorderSuccessor {
     public Integer getMinInRightTree(BinaryTreeNode node) {
         if (node == null) return null;
