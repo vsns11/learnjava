@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+// Time: O(n), Space: O(n)
 public class LevelOrderTraversal {
 
     public List<Integer> executeLevelOrderTraversal(BinaryTreeNode node) {
