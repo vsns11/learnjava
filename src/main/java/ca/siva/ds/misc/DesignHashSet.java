@@ -12,6 +12,7 @@ import java.util.LinkedList;
  *  At most N/K would be the max size of each bucket, therefore O(N/K)
  *
  */
+
 class MyHashSet {
 
     public Bucket[] bucketList;
@@ -71,7 +72,14 @@ class MyHashSet {
 }
 
 
-
+/**
+ * 3 approaches to avoid collision in hashset
+ *  >> separate chaining > provide separate buckets for each generated hash value(same or different).
+ *  >> open address allocation > allocate the free address when there's a fewer collisions.
+ *  >> 2 pick hashing > pick the hash with lowest collisions.
+ *
+ *
+ */
 
 /**
  * Your MyHashSet object will be instantiated and called as such:
