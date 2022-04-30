@@ -1,4 +1,4 @@
-package ca.siva.ds.arrays;
+package ca.siva.ds.array;
 
 /**
  * #524

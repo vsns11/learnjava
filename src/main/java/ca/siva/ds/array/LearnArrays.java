@@ -1,4 +1,4 @@
-package ca.siva.ds.arrays;
+package ca.siva.ds.array;
 
 import java.util.Arrays;
 import java.util.Comparator;

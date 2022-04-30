@@ -1,4 +1,4 @@
-package ca.siva.ds.graphs;
+package ca.siva.ds.graph;
 
 public class MinCostToConnectAllPoints {
 
