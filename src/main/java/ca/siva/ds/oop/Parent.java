@@ -1,4 +1,4 @@
-package ca.siva.ds.oops;
+package ca.siva.ds.oop;
 
 public interface Parent {
     String getParentData();
