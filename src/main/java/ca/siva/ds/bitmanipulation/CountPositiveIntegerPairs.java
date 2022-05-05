@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * # 523
+ * # DCP: 523
  * This problem was asked by Jane Street.
  * <p>
  * Given integers M and N, write a program that counts how many positive integer pairs (a, b) satisfy the following conditions:
