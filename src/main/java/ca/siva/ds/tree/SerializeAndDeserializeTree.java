@@ -1,4 +1,4 @@
-package ca.siva.ds.trees;
+package ca.siva.ds.tree;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,7 +1,4 @@
-package ca.siva.ds.trees;
-
-import java.util.ArrayList;
-import java.util.List;
+package ca.siva.ds.tree;
 
 public class SumOfPathNumbers {
 

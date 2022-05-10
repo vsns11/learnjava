@@ -1,4 +1,4 @@
-package ca.siva.ds.trees;
+package ca.siva.ds.tree;
 
 public class TwoTreesIdentical {
     public boolean areIdentical(BinaryTreeNode node1, BinaryTreeNode node2) {

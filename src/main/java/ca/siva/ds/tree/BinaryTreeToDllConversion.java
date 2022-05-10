@@ -1,7 +1,6 @@
-package ca.siva.ds.trees;
+package ca.siva.ds.tree;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 

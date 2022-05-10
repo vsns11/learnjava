@@ -1,4 +1,4 @@
-package ca.siva.ds.trees;
+package ca.siva.ds.tree;
 
 // Time: O(n), Space O(n)
 public class PathWithGivenSequence {
