@@ -1,7 +1,7 @@
 package ca.siva.ds.array;
 
 /**
- * Leetcode 287
+ * Leetcode 287. O(n), O(1)
  */
 public class FindTheDuplicateNumber {
     class Solution {
