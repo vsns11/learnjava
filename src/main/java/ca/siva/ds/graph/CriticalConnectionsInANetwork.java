@@ -2,6 +2,9 @@ package ca.siva.ds.graph;
 
 import java.util.*;
 
+/**
+ * LeetCode: 1192, Time: O(V + E), Space: O(E)
+ */
 public class CriticalConnectionsInANetwork {
     class Solution {
 
