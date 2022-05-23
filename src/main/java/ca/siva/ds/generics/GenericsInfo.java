@@ -1,4 +1,4 @@
-package ca.siva.ds.array.generics;
+package ca.siva.ds.generics;
 
 //import javax.annotation.;
 

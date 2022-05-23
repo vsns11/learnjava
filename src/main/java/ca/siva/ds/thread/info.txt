@@ -1,0 +1,56 @@
+
+key points:
+>> Processes won't share resources among themselves, whereas threads can share resources from a process.
+>> Global variables are accessed by all the threads. But there's a locking mechanism available inorder to apply the change.
+>> Two types of concurrency models:
+        1) Pre-emptive multitasking model => every thread gets cpu slice, as program doesn't have control over making the context switch
+        2) Co-operative multitasking model => It's the opposite of 1, as program provides an instruction to the scheduler to make the context switch.
+                cons: A malfunctioned program can run forever in this model.
+
+>> Mutex and Semaphore are OS, lower level constructs.
+
+>> Mutex: It allows only serialized access on a shared resource. for e.g., when there are multiple threads tries to acquire a lock,
+        only one of the thread will eventually get access and the remaining threads will fall into a wait state.
+        Another point is, the thread that acquired the lock can only be able to unlock the resource - it defines an ownership strategy.
+
+>> Semaphore: Semaphore has a permit limit, that means that many number of threads can enter the crtical section, and once the max permit limit is reached.
+            the remaining threads will go into a wait state. Semaphore solves the issue of missing signals.
+             For e.g., a database can accept 100 connections, means 100 threads can acquire different connections of db.
+             However, if a new one comes after connections are full, it will go to wait state until the existing connection is freed.
+
+>> Mutex vs Semaphore:
+        A semaphore can act as mutex, but mutex cannot masquerade as semaphore. Because semaphore has a signalling mechanism, which can be used to signal among threads.
+        Also Semaphore doesn't have an owner ship strategy, that only the acquired thread can release the lock.
+
+>> Monitor:
+    Monitor provides mutual exclusion and more. Usually when another thread, say T1 is waiting on a predicate(value), depending on the change by T2,
+
+    --producer consumer problem--
+
+     old consumer without monitor and only mutex:
+        // This approach is very slower, as it consumes more cpu cycles
+        void consumerCode() {
+            mutex.acquire() // Acquire mutex
+            while (predicate is false) {
+                // release lock, so other thread can acquire the resource and change the value to true
+                // acquire lock, check again whether the resource got updated or not.
+            }
+        }
+
+     When monitor is used,
+                void consumerCode() {
+                    mutex.acquire() // Acquire mutex
+                    while (predicate is false) {  // while loop is needed because, when the lock releases, and if there's another thread that can acquire lock and change the value.
+                        condVar.wait() // Atomically, release lock and places the thread in wait queue, so other thread can acquire the resource and change the value to true,
+                                       // then give a signal on the condVar, so the wait( here consumer) threads can be moved to entry set and start acquiring the monitor again for execution.
+                    }
+                }
+                void producerCode() {
+                   mutex.acquire() // Acquire mutex
+                   predicate = true
+                   condVar.signal() // Give a signal on the condVar, so the wait threads can be moved to entry queue and start acquiring the monitor again for execution.
+                   mutex.release()
+                }
+
+>> Mutex vs Monitor:
+    Mutex are provided by the os library/kernel and libraries provide an interface to invoke it. This makes them heavy and slower.
