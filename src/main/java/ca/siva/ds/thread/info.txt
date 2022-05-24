@@ -23,7 +23,7 @@ key points:
         Also Semaphore doesn't have an owner ship strategy, that only the acquired thread can release the lock.
 
 >> Monitor:
-    Monitor provides mutual exclusion and more. Usually when another thread, say T1 is waiting on a predicate(value), depending on the change by T2,
+    Monitor provides mutual exclusion and a conditional variable. Usually when another thread, say T1 is waiting on a predicate(value), depending on the change by T2,
 
     --producer consumer problem--
 
@@ -53,4 +53,54 @@ key points:
                 }
 
 >> Mutex vs Monitor:
-    Mutex are provided by the os library/kernel and libraries provide an interface to invoke it. This makes them heavy and slower.
+    1) Mutex are provided by the os library/kernel and libraries provide an interface to invoke it. This makes them heavy and slower.
+    2) Monitor is fast and light-weight, since it is provided by library itself, don't need to request OS. It used for maintaining synchronization among threads of a same process.
+    3) A monitor is a mutex lock, which is implicitly associated with an object. Usually, when synchronized is used, mutex lock is created around the code.
+
+>> In Java, every object is a conditional variable, it comes with wait() and notify() methods. Also, these methods need to be called inside a synchronized method (static methods too).
+>> Hoare vs Mesa Monitors(follows the same concepts as discussed above).
+>> In Hoare, the signaling thread make sure that waiting thread acquires the lock, so that no thread in the mean can alter the predicate value.
+>> Java follows Mesa semantics. Mesa monitors are more efficient than Hoare Monitors.
+>> Semaphore vs Monitor.
+    >> Monitor is made up of a mutex and a condition variable.
+    >> Semaphore can allow multiple threads to access the critical section. Whereas, monitor allows only single thread.
+    >> In Semaphore, locking mechanism control is done by developer, which can be error prone. However, in Monitor, its done implicitly.
+    >> Java monitors enforce correct locking by throwing the IllegalMonitorState exception, when methods are invoked without acquiring the associated lock.
+    >> Semaphore is a lightweight, but error-proned.
+>> Amdahl's law explains the speedup a program can be achieved at best by using additional computing resources. s(n) = 1 / ((1-p) + p /number of processors or threads)
+>> Moore's law states that number of transistors per square inch on a chip with double every 2 years.
+>> Atomic assignments:
+      > Means, data won't change in the variable during the assignment. for e.g., when 2nd thread tries to do an assignment to a variable, while 1st thread also doing the same
+      there's no chance that both data interleave on the variable.
+      > Atomic assignments doesn't guarantee that the variable is thread safe. To make thread safe, use synchronized / locks.
+>> Thread safe:
+        > By default, all classes and API methods are thread safe.
+        > Consider synchronized declared block of code as a critical section piece of code (mutex portion). There's a lock/monitor associated with the object once the caller acquires the lock.
+         no other thread can invoke synchronized declared methods until the current thread releases the lock.
+            for e.g., suppose there are 3 different synchronized methods on the same object, and 3 different threads tries to invoke those methods.
+                and once any thread acquires the execution, remaining 2 other threads will be in wait state.
+        > By using synchronized keyword, the main important ramification is, its implicitly acquires the monitor and releases the monitor lock by the same thread.
+          However, in semaphores different methods can acquire the lock and release the lock.
+          Refer to incorrectSynchronization example.
+        > When synchronized is used, it may reduce the throughput. For e.g, having 2 fields and synchronized on their respective 2 getter methods, when the thread1 is accessing the first getter method,
+          while the second thread accessing the second getter method, will go into wait state. This is more performance consuming.
+          the solution is to lock at finer granularity, use 2 different locks for each property, so that both can be accessed in parallel.
+>> wait() -> It is called inside a synchronized block by acquiring the monitor of the object. This makes atomically releases the lock and places the thread in a wait queue.
+>> notify() -> It will notify one of the thread from the wait queue - it can be any random thread.
+>> notifyAll() -> It notifies all the threads, so any random thread can acquire the lock.
+        Sometimes it's better to use notifyAll, especially when there's a chance that single thread wont able to pick up the lock due to any expected reason, the other thread can acquire the lock.
+
+>> synchronized(LOCK) {
+       Thread.sleep(1000); // LOCK is held
+   }
+   synchronized(LOCK) {
+       LOCK.wait(); // LOCK is not held
+   }
+>> When a sleeping / waiting  thread invoked, it will throw an interruptedException.
+    when interrupt() is called on a thread, it just sets the value of flag to false, that is polled by wait() and sleep() methods,
+    to check whether the flag is set to true or not.
+>>
+
+
+
+
