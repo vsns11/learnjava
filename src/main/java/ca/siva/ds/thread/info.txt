@@ -99,7 +99,16 @@ key points:
 >> When a sleeping / waiting  thread invoked, it will throw an interruptedException.
     when interrupt() is called on a thread, it just sets the value of flag to false, that is polled by wait() and sleep() methods,
     to check whether the flag is set to true or not.
->>
+>> ****Interrupting an normal thread(i.e, not in sleep mode), will simply set the flag to true.
+>> Double and Long are not atomic assignments in java, as jvm uses 2 different 32 bits, which can interleave, so it should be denoted volatile when used with threads.
+>> Volatile implies all writes occur directly into memory, instead of updating cpu cache. So, all the reading threads will have an updated value.
+>> Volatile doesn't imply thread safety. e.g., when there are multiple threads writing to a same variable(volatile), then it doesn't guarantee thread safety.
+ best case is use volatile, only when one thread is modifying the value and the remaining threads refer to the updated value of this variable.
+
+>> Reentrant Lock:
+     Upgrade of mutex is Reentrant lock. But here lock can be done in a different method and unlock in a different method.
+     It throws IllegalMonitorStateException, when unlock is called without locking.
+
 
 
 
