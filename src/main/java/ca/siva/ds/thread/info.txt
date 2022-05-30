@@ -108,6 +108,47 @@ key points:
 >> Reentrant Lock:
      Upgrade of mutex is Reentrant lock. But here lock can be done in a different method and unlock in a different method.
      It throws IllegalMonitorStateException, when unlock is called without locking.
+     Lock lock = new ReentrantLock();
+     Condition condition = lock.newCondition();
+     In Synchronized paradigm, there's only one wait-set associated with the object. But with the reentrant locks, there can be multiple condition variables on the same lock.
+
+>>Thread states in Java:
+         1) new
+         2) runnable
+         3) wait
+         4) timed wait
+         5) blocked
+         6) terminated
+>> Missed Signals: Signal was sent before awaiting on it; which can enable the await thread to block forever can case execution time out.
+       Semaphores can be used to fix these type of missing signals.
+>> It is always recommended to use semaphore.release() or lock.unlock() in a finally block, such that even if the failure happens in code, finally will execute and release the semaphore/rentrant lock.
+>> Spurious wakeups:
+    A thread can woken up without calling signal on it. A thread can wake up without being notified, interrupted or timing out.
+    So, that's why application must guard on a condition variable as a check by using a while loop.
+    e.g.,:
+            synchronized(obj) {
+                while (condition does not hold) {
+                    obj.wait(timeout)
+                }
+
+            }
+
+>> Locks can have a huge impact over performance, especially when the thread shared data/state is being contended for access by multiple threads.
+    Locking cons:
+        1) Thread scheduling vs useful work:
+            when many threads are waiting to acquire a lock, and one wins the race condition to achieve the lock
+             and do the work, will end up causing most of the time wasted in scheduling the remaining threads in compare to the work its getting done.
+        2) Priority Inversion:
+             A lower priority thread acquires the lock and never released due to page fault, scheduling issues etc can cause the priority thread in a blocked state.
+        3) Liveness issues:
+              a thread can run into an infinite loop, end up causing other threads in a blocked state; will end up a dead lock.
+        4) locking, a heavy weight mechanism
+
+>> Atomic vs volatile:
+        1) volatile variables can't be used for executing compound actions: read variable, write variable and update variable.
+           volatile ensures, that certain expected state is true across different threads, while atomics ensure that operation on variables are performed atomically.
+           volatile doesn't deal with atomicity.
+
 
 
 
