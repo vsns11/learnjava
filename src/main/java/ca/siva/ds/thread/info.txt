@@ -23,6 +23,7 @@ key points:
         Also Semaphore doesn't have an owner ship strategy, that only the acquired thread can release the lock.
 
 >> Monitor:
+   Monitor is an entity provides lock, wait queue and re-entrance queue.
     Monitor provides mutual exclusion and a conditional variable. Usually when another thread, say T1 is waiting on a predicate(value), depending on the change by T2,
 
     --producer consumer problem--
