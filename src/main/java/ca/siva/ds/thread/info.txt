@@ -172,5 +172,11 @@ java locks can be turned into fair locks by passing in the fair constructor para
     > Using writes without synchrnoization can cause datarace, and with re-ordering of JVM statements can end up returning different results.
     > Happens-before memory model: Unlocking monitor happens before the monitor locking.
 
+Producer consumer problem:
+    Problem statement:
+        Producer must be blocked, when the size reaches the maximum capacity,
+        same as well for the consumer when there's no element, it should be blocked. once a new element is added to the queue, it should notify the blocking consumer.
+
+
 
 
