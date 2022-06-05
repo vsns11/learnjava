@@ -145,13 +145,32 @@ key points:
               a thread can run into an infinite loop, end up causing other threads in a blocked state; will end up a dead lock.
         4) locking, a heavy weight mechanism
 
+>> Contention: Thread trying to acquire a lock.
+
+>> In atomic, 2 main methods are available
+        1) compareAndSwap
+        2) compareAndSet
+
 >> Atomic vs volatile:
         1) volatile variables can't be used for executing compound actions: read variable, write variable and update variable.
            volatile ensures, that certain expected state is true across different threads, while atomics ensure that operation on variables are performed atomically.
            volatile doesn't deal with atomicity.
+    > Atomic operations are handled using compare and set(CAS) approach; it consumes only cpu cycles by avoiding scheduling overhead, which comes with threads.
+    > Atomic operations are always faster than locking mechanism, as it occurs thru machine level atomic instructions, that allows no scheduling overhead.
 
+>> An algorithm is called non-blocking if the failure or suspension oif a thread doesn't cause the failure or suspension of another thread.
+>> An algorithm is called lock free, if at every step of the algorithm, some thread participant can make progress.
 
+>> Lock Fairness: Usually when there are multiple threads trying to acquire a lock, only one of them can acquire the lock, especially the one that requests unfairly greater number of times.
+java locks can be turned into fair locks by passing in the fair constructor parameter. However, they exhibit lower throughput.
+>> ThreadPools: The main use of having thread pools, is thread stays in the pool, without deallocating it's resources, therefore the newer task can be submitted over a thread pool.
+    In java, there's a ThreadpoolExecutor for creating thread pools.
 
+>> Lack of cache coherency: Where thread's local cache is not in coherent(consistent) with the changes occur in the main memory.
+    > JSR-133 was developed to tackle these issues. Within-thread as-if-serial semantics: all the statements inside the thread follow execution serially.
+    > JMM(java memory model) do reordering of statements as long as the outcome of the program isn't altered.
+    > Using writes without synchrnoization can cause datarace, and with re-ordering of JVM statements can end up returning different results.
+    > Happens-before memory model: Unlocking monitor happens before the monitor locking.
 
 
 

@@ -1,0 +1,8 @@
+
+An empty interface is called Marker interface. There are 3 types of marker interfaces in java.
+1. Serializable
+    > Use to serialize the object and can save the object in a file.
+2. Cloneable.
+    > Class that implements this interface can clone the fields using clone() else it will throw CloneNotSupportedException.
+3. Remote
+   > Its used in RMI, a class implements this interface, can invoke these methods from a non local machine.

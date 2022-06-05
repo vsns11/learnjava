@@ -1,0 +1,12 @@
+In Collection like hashmap and hashSet.
+> HashCode is used in collection to identify the right bucket for placing/searching the element.
+> Once the bucket is found, iterate the bucket to find the right element to update by using the equals method.
+
+>Always override both equals and hashCode method. Failure to do so will impact all hash-based collections.
+ As it breaks the below contract:
+ 1) Whenever hashcode is invoked twice on the same object, the value will always be same.
+    The value need not be same from one execution of an application to another execution of the same application.
+ 2) if two objects are equal according to equals(object) method, then calling the hashcode method on each of the two
+    objects must produce the same integer result.
+ 3) if two objects are unequal, it should return distinct value for each object.
+ 
