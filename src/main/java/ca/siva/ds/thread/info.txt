@@ -176,6 +176,7 @@ Producer consumer problem:
     Problem statement:
         Producer must be blocked, when the size reaches the maximum capacity,
         same as well for the consumer when there's no element, it should be blocked. once a new element is added to the queue, it should notify the blocking consumer.
+    Solution: solved using synchronized and also using mutex.
 
 
 

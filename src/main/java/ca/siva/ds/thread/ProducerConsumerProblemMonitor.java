@@ -7,7 +7,7 @@ package ca.siva.ds.thread;
  * Producer must be blocked, when the size reaches the maximum capacity,
  * same as well for the consumer when there's no element, it should be blocked. once a new element is added to the queue, it should notify the blocking consumer.
  */
-public class ProducerConsumerProblem {
+public class ProducerConsumerProblemMonitor {
     public static void main(String args[]) throws Exception {
         final BlockingQueue<Integer> q = new BlockingQueue<Integer>(5);
 
