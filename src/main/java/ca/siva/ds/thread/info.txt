@@ -172,12 +172,23 @@ java locks can be turned into fair locks by passing in the fair constructor para
     > Using writes without synchrnoization can cause datarace, and with re-ordering of JVM statements can end up returning different results.
     > Happens-before memory model: Unlocking monitor happens before the monitor locking.
 
-Producer consumer problem:
+1) Producer consumer problem:
     Problem statement:
         Producer must be blocked, when the size reaches the maximum capacity,
         same as well for the consumer when there's no element, it should be blocked. once a new element is added to the queue, it should notify the blocking consumer.
     Solution: solved using synchronized and also using mutex.
 
+2) Rate Limiter using token bucket algorithm:
+    Problem statement:
+       A new token is generated every second, till it reaches the given maximum limit, all the threads that are requesting should get blocked and assign a token when available by calling a getToken() method.
+    Solution:
+      #1: Keep track of currently available tokens by using the currentTime. When it reaches the limit, enable sleep on the thread for a second and then update the last request time.
+      #2: Use a daemon thread that updates available tokens, exits only when the application terminates. Its not advised to create a daemon thread inside a constructor.
+    similar questions:
+        Grant tokens to threads in a FIFO order // use Reentrant lock with fairness true
+        Generalize the solution for any rate of token generation
 
-
+3) Thread Safe Deferred Callback:
+     Problem statement:
+        callback need to be executed after waiting for a given amount of time.
 
