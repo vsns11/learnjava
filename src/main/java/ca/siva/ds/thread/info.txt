@@ -191,4 +191,7 @@ java locks can be turned into fair locks by passing in the fair constructor para
 3) Thread Safe Deferred Callback:
      Problem statement:
         callback need to be executed after waiting for a given amount of time.
+        To solve this, use reentrant lock
+
+4)
 
