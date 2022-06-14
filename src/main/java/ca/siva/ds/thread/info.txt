@@ -172,6 +172,10 @@ java locks can be turned into fair locks by passing in the fair constructor para
     > Using writes without synchrnoization can cause datarace, and with re-ordering of JVM statements can end up returning different results.
     > Happens-before memory model: Unlocking monitor happens before the monitor locking.
 
+Liveness:
+Starvation:
+Livelock:
+
 1) Producer consumer problem:
     Problem statement:
         Producer must be blocked, when the size reaches the maximum capacity,
@@ -193,5 +197,9 @@ java locks can be turned into fair locks by passing in the fair constructor para
         callback need to be executed after waiting for a given amount of time.
         To solve this, use reentrant lock
 
-4)
+4) Implement Semaphore that initializes with maximum count:
+    Problem statement:
+       By default, in Java's Semaphore, it just provides initial number of permits, not a maximum permit.
+       User has to define that explicitly. Design a semaphore that initializes with max number of permits.
+      To solves this, use synchronization with monitor approach. Refer to code.
 
