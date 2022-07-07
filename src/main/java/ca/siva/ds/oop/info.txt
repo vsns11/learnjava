@@ -1,0 +1,6 @@
+Types of classes:
+1. Static inner class
+2. Non-static inner class
+3. Abstract inner class
+4. Anonymous class
+5. Local class

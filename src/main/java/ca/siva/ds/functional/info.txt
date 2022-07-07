@@ -1,0 +1,21 @@
+
+default methods of functionalInterfaces:
+    Consumer - andThen(Consumer x) - input: Consumer - returns: Consumer
+    Function - andThen(Function x) - input: Function - returns: Function
+    Function - compose(Function x) - input: Function - returns: Function
+    Predicate - and(Predicate x) - input: Predicate - returns: Predicate
+    Predicate - negate() - No input - returns: Predicate
+    Predicate - or(Predicate x) - input: Predicate - returns: Predicate
+
+
+Static methods of Optional:
+1. Optional.of
+2. Optional.ofNullable
+3. Optional.empty
+
+Instance methods of Optional:
+1. get()
+2. OrElse(T other)
+3. OrElseGet(Supplier s)
+4. OrElseThrow() // by default it throws NoSuchElementException
+5. OrElseThrow(Supplier s) // use supplier to throw the exception.
