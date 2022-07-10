@@ -1,4 +1,15 @@
 
+Functional Interfaces:
+  1. Predicate
+  2. BiPredicate
+  3. Function
+  4. BiFunction
+  5. Consumer
+  6. BiConsumer
+  7. UnaryOperator
+
+
+
 default methods of functionalInterfaces:
     Consumer - andThen(Consumer x) - input: Consumer - returns: Consumer
     Function - andThen(Function x) - input: Function - returns: Function
@@ -19,3 +30,11 @@ Instance methods of Optional:
 3. OrElseGet(Supplier s)
 4. OrElseThrow() // by default it throws NoSuchElementException
 5. OrElseThrow(Supplier s) // use supplier to throw the exception.
+
+Streams:
+    Source --- Intermediate -- Terminal operations
+1) Finite Streams:
+   > Stream.empty(); // count 0
+   > Stream.of(1, 2, 3) // of uses var args
+   > list.Stream()
+2) Infinite Streams

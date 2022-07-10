@@ -1,0 +1,4 @@
+To define the solution in dp, follow the below steps
+    1) Define the structure and its working of a dp array.
+    2) Find the base case for the same dp array
+    3) Transition case by increasing the value of i.
