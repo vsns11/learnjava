@@ -2,7 +2,7 @@ package ca.siva.ds.dp;
 
 // Leetcode: 746
 public class MinCostClimbingStairs {
-    // Time: O(N), Space: O(1)
+    // Time: O(N), Space: O(N)
     class Solution {
         public int minCostClimbingStairs(int[] cost) {
             // The array's length should be 1 longer than the length of cost
@@ -20,5 +20,23 @@ public class MinCostClimbingStairs {
             // The final element in minimumCost refers to the top floor
             return minimumCost[minimumCost.length - 1];
         }
+
     }
+
+    // Time: O(N), Space: O(1)
+    class Solution2 {
+        public int minCostClimbingStairs(int[] cost) {
+            int oneStepBack = 0, twoStepBack = 0;
+
+            for (int i = 2; i < cost.length + 1; ++i) {
+                int tmp = oneStepBack;
+                oneStepBack = Math.min(oneStepBack + cost[i - 1], twoStepBack + cost[i - 2]);
+                twoStepBack = tmp;
+            }
+
+            return oneStepBack;
+        }
+
+    }
+
 }
