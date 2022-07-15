@@ -38,3 +38,5 @@ Streams:
    > Stream.of(1, 2, 3) // of uses var args
    > list.Stream()
 2) Infinite Streams
+     >stream.iterate()
+     >
