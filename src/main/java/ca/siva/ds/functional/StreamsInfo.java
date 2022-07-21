@@ -1,6 +1,6 @@
 package ca.siva.ds.functional;
 
-import com.sun.tools.javac.util.List;
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -47,7 +47,13 @@ public class StreamsInfo {
 
         }
         Test i = new Test();
-        System.out.println(Optional.ofNullable(x).map( y -> null).map(w -> i.w).orElse(123));
+        i.w = 100;
+        List<Test> list1 = new ArrayList<>();
+        list1.add(i);
+        Stream<Test> es = Stream.empty();
+        System.out.println(es.filter(q -> q.w == 1).findFirst().map(r -> r.w));
+//        System.out.println();
+//        System.out.println(Optional.ofNullable(x).map( y -> null).map(w -> i.w).orElse(123));
 //        System.out.println(Optional.of(new Test()).map( y -> null).orElse(123));
         //Terminal Operations:
 
