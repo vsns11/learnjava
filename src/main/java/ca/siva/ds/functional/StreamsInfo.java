@@ -1,13 +1,49 @@
 package ca.siva.ds.functional;
 
-import java.util.List;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamsInfo {
+    public static <T> Set<T> intersect(Collection<T>... collections) {
+        //Here is where the magic happens
+        return (Set<T>) Arrays.stream(collections).reduce(
+                (a,b) -> {
+                    Set<T> c = new HashSet<>(a);
+                    c.addAll(b);
+                    return c;
+                }).orElseGet(HashSet::new);
+    }
+
+
     public static void main(String[] args) {
+        List<Integer> arr1 = new ArrayList<>(){
+            {
+                add(10);
+                add(12);
+            }
+        };
+
+        List<Integer> arr2 = new ArrayList<>(){
+            {
+                add(12);
+                add(13);
+                add(10);
+            }
+
+        };
+        List<Integer> collection = new ArrayList<>();
+        collection.addAll(arr1);
+        collection.addAll(arr1);
+        collection.addAll(arr2);
+        System.out.println(collection);
+        System.out.println(collection.stream().distinct().collect(Collectors.toList()));
+
+    }
+
+    public static void streamTest() {
+
         List<Integer> list = List.of(1, 2, 3, 12, 10, 4);
 
 //        List<Integer> list = null;
@@ -51,12 +87,15 @@ public class StreamsInfo {
         List<Test> list1 = new ArrayList<>();
         list1.add(i);
         Stream<Test> es = Stream.empty();
-        System.out.println(es.filter(q -> q.w == 1).findFirst().map(r -> r.w));
+
+
+
+
+//        System.out.println(es.filter(q -> q.w == 1).findFirst());
 //        System.out.println();
 //        System.out.println(Optional.ofNullable(x).map( y -> null).map(w -> i.w).orElse(123));
 //        System.out.println(Optional.of(new Test()).map( y -> null).orElse(123));
         //Terminal Operations:
-
 
     }
 }
