@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class MaxAreaOfIsland {
-    //Leetcode: 695, Time: O(M * N), Space: O(min(m. n))
+    //Leetcode: 695, Time: O(M * N), Space: O(min(m, n))
     class Solution {
         public int maxAreaOfIsland(int[][] grid) {
             int maxArea = 0;
