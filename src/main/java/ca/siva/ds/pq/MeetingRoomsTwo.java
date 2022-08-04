@@ -1,4 +1,4 @@
-package ca.siva.ds.annotation.pq;
+package ca.siva.ds.pq;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
