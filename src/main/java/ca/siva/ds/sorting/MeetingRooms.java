@@ -1,6 +1,7 @@
 package ca.siva.ds.sorting;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.TreeMap;
 
 public class MeetingRooms {
@@ -28,7 +29,7 @@ public class MeetingRooms {
     //Optimal in space: Time: O(NlogN), Space: O(1)
     class OptimalSolution {
         public boolean canAttendMeetings(int[][] intervals) {
-            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+            Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
             for (int i = 0; i < intervals.length - 1; i++) {
                 if (intervals[i][1] > intervals[i + 1][0]) {
                     return false;
