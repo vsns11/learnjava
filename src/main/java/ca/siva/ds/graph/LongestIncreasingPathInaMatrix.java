@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class LongestIncreasingPathInaMatrix {
 
-    // LeetCode: 329, Time: O(M * N), Space: O(M *N)
+    // LeetCode: 329, Time: O(M * N), Space: O(M *N), Space can be improved by removing the visiting array
     class Solution {
         public int longestIncreasingPath(int[][] matrix) {
             Map<String, Integer> cache = new HashMap<>();
@@ -14,7 +14,6 @@ public class LongestIncreasingPathInaMatrix {
 
             for (int i = 0; i < matrix.length; ++i) {
                 for (int j = 0; j < matrix[0].length; ++j) {
-
                     int calcPath = longestIncreasingPathHelper(matrix, i, j, l, c, cache, visiting, -1);
                     result = Math.max(result, calcPath);
 
