@@ -1,11 +1,16 @@
 package ca.siva.ds.dp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Leetcode: 300, Time: O(n^2), Space: O(m)
  */
 public class LongestIncreasingSubSequence {
     class Solution {
         public int lengthOfLIS(int[] nums) {
+            List<Integer> x = new ArrayList<>();
+
             int[] maxIncSeq = new int[nums.length];
 
             maxIncSeq[0] = 1;
