@@ -1,12 +1,16 @@
 package ca.siva.ds.binarysearch;
 
+import java.util.HashMap;
+
 public class RandomPickWithWeight {
     //Leetcode: O(N + log n), Space: O(N)
     class Solution {
+
         private int[] prefixSums;
         private int totalSum;
 
         public Solution(int[] w) {
+
             this.prefixSums = new int[w.length];
 
             int prefixSum = 0;
