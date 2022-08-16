@@ -11,11 +11,11 @@ public class MeetingRooms {
             TreeMap<Integer, Integer> calendar = new TreeMap<>();
             Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 
-            for (int[] itvl: intervals) {
+            for (int[] itvl : intervals) {
                 Integer prevStart = calendar.floorKey(itvl[0]);
                 Integer nextStart = calendar.ceilingKey(itvl[0]);
 
-                if ((prevStart == null || itvl[0] >= calendar.get(prevStart)) && (nextStart == null || itvl[1] <= nextStart )) {
+                if ((prevStart == null || itvl[0] >= calendar.get(prevStart)) && (nextStart == null || itvl[1] <= nextStart)) {
                     calendar.put(itvl[0], itvl[1]);
                 } else {
                     return false;
