@@ -37,8 +37,9 @@ public class StreamsInfo {
         collection.addAll(arr1);
         collection.addAll(arr1);
         collection.addAll(arr2);
-        System.out.println(collection);
-        System.out.println(collection.stream().distinct().collect(Collectors.toList()));
+//        System.out.println(collection);
+//        System.out.println(collection.stream().distinct().collect(Collectors.toList()));
+        streamTest();
 
     }
 
@@ -90,12 +91,38 @@ public class StreamsInfo {
 
 
 
-
-//        System.out.println(es.filter(q -> q.w == 1).findFirst());
-//        System.out.println();
-//        System.out.println(Optional.ofNullable(x).map( y -> null).map(w -> i.w).orElse(123));
-//        System.out.println(Optional.of(new Test()).map( y -> null).orElse(123));
         //Terminal Operations:
+        /*
+          Reduce 3 variants
+          1) T reduce(T identity,  BinaryOperator<T> accumulator)
+          2) Optional<U> reduce(BinaryOperator<T> accumulator)
+          3) <T, R> R reduce(R identity, BiFunction<R, ? super T, R> accumulator, BinaryOperator<R> combiner)
+         */
+        List<Integer> sList = Arrays.asList(1, 2, 3, 3);
+        System.out.println(sList);
+        int totalSum = sList.parallelStream().reduce(0, (w1, q1) -> w1 + q1, (w2, q2) -> w2 + q2);
+        int totalSum2 = sList.stream().reduce(0, (w1, q1) -> w1 + q1);
+        System.out.println(totalSum);
+        System.out.println(totalSum2);
+
+        /*
+         Collect has 2 variants
+          1) R collect(Supplier<R> supplier, BiConsumer<R, T> accumulator, BiConsumer<R, R> combiner)
+          2) <R, A> R collect(Collector<? super T, A, R> collector) ****
+         */
+        Map<Integer, Boolean> cmap = sList.stream().collect(
+                () -> new HashMap<>(),
+                (HashMap<Integer, Boolean> ir, Integer value) -> {
+                    if (!ir.containsKey(value)) {
+                        ir.put(value, Boolean.TRUE);
+                    }
+                },
+                (HashMap<Integer, Boolean> map1, HashMap<Integer, Boolean> map2) -> {}
+                );
+
+        System.out.println(cmap);
+
+//        sList.stream().collect()
 
     }
 }
