@@ -122,7 +122,76 @@ public class StreamsInfo {
 
         System.out.println(cmap);
 
-//        sList.stream().collect()
+        System.out.println(Stream.of("1", "2", "3").collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString());
+        System.out.println(Stream.of("1", "2", "3").collect(TreeSet::new, TreeSet::add, TreeSet::addAll).toString());
+
+        /*
+         count()
+         */
+        System.out.println(Stream.iterate(1, n -> n < 3, n -> n + 1).count());
+
+        /*
+         min(Comparator<? super T > comparator)
+         max(Comparator<? super T > comparator)
+         */
+        System.out.println(Stream.of(1, 2, 3).max(Integer::compareTo).orElse(null));
+
+        /*
+        Optional<T> findFirst()
+        Optional<T> findAny()
+        */
+        System.out.println(Stream.of(1, 2, 3).findAny().orElse(null));
+        System.out.println(Stream.of(1, 2, 3).findFirst().orElse(null));
+
+        /*
+         boolean allMatch(Predicate<? super T> predicate)
+         boolean anyMatch(Predicate<? super T> predicate)
+         boolean noneMatch(Predicate<? super T> predicate)
+         */
+        List<String> terList = List.of("1",  "2", "3");
+        System.out.println(terList.stream().anyMatch(_x -> Character.isDigit(_x.charAt(0))));
+        System.out.println(Stream.generate(() -> "1iva").allMatch(_x -> Character.isAlphabetic(_x.charAt(0))));
+        System.out.println(Stream.generate(() -> "1iva").noneMatch(_x -> Character.isDigit(_x.charAt(0))));
+
+        /*
+        void forEach(Consumer < ? super T > action)
+        */
+        terList.stream().forEach(System.out::print);
+
+        // Keeps the treeset sorted
+        System.out.println(Stream.of(2, 1, 3).collect(Collectors.toCollection(TreeSet::new)).toString());
+
+        // To keep treeset unsorted, doesn't guaranteed which impl of set you'll get.
+        System.out.println(Stream.of(2, 1, 3).collect(Collectors.toSet()).toString());
+
+        /*
+            Intermediate Operations
+            Stream<T> filter(Predicate<? super T> predicate)
+            Stream<T> distinct()
+            Stream<T> limit(long maxSize)
+            Stream<T> skip(long n)
+            Stream<R> map(Function<? super T, ? extends R> mapper)
+            Stream<R> flatMap(Function<? super T, Stream<? extends R>> mapper)
+            Stream<T> sorted(Comparator< ? super T> comparator)
+            Stream<T> peek(Consumer<? super T> action)
+         */
+        // filter()
+        terList.stream().filter(_x -> _x.startsWith("ab"));
+        // distinct(), calls equals method on each of the method
+        terList.stream().distinct().forEach(System.out::println);
+        // skip(),It will skip 2 elements indexed at 0 and 1. And start processing from index 2
+        terList.stream().skip(2).forEach(System.out::println);
+        // map()
+        Stream.of("monkey", "xx").map(String::length);
+        // flatMap()
+        Stream.of(Stream.of(2)).flatMap(w -> w).forEach(System.out::print);
+        // sorted()
+        Stream.of(2, 1).sorted().forEach(System.out::println);
+        // sorted(Comparator< ? super T > comparator)
+        Stream.of(2, 1).sorted(Comparator.naturalOrder()).forEach(System.out::print);
+        System.out.println("\n");
+        Stream.of(2, 0, 1).sorted(Comparator.reverseOrder()).forEach(System.out::print);
+        Stream.of(2, 0, 1).sorted(Comparator.reverseOrder()).peek(System.out::print).forEach(System.out::print);
 
     }
 }
