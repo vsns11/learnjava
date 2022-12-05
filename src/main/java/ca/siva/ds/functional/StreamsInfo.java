@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 public class StreamsInfo {
     public static <T> Set<T> intersect(Collection<T>... collections) {
         //Here is where the magic happens
+
         return (Set<T>) Arrays.stream(collections).reduce(
                 (a,b) -> {
                     Set<T> c = new HashSet<>(a);
