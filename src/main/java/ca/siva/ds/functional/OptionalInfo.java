@@ -4,9 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class OptionalInfo {
 
@@ -40,6 +43,11 @@ public class OptionalInfo {
         int _w = 1;
         Integer _z = _w;
 
+        List<Integer> testStreamList = null;
+        System.out.println(Optional.ofNullable(testStreamList)
+                .stream()
+                .flatMap(x -> x.stream())
+                .findFirst());
 
 
     }

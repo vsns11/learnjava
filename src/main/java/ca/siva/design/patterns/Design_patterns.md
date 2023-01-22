@@ -489,6 +489,8 @@ public class Client {
          2) Concrete methods can be best represented as a singleton object.
 
 
+
+
 ================================
 
     Structural Patterns:
@@ -515,3 +517,12 @@ public class Client {
     > Template method
     > Strategy pattern
     > Visitor pattern
+
+```
+      when to use?
+       - pros
+         1) It is mainly useful for building the frameworks
+       - cons
+         1) Inclusion of different concrete factory can be done by creating a sub interface (extends main factory inteface), 
+            by doing so, all of the in eligible factory has to declare those methods and return null value. 
+         2) Concrete methods can be best represented as a singleton object.

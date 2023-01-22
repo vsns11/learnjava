@@ -121,6 +121,11 @@ public class StreamsInfo {
                 (HashMap<Integer, Boolean> map1, HashMap<Integer, Boolean> map2) -> {}
                 );
 
+//        Map<String, String> dmap = sList.stream().collect(Collectors.toMap(
+//                key -> String.valueOf(key),
+//                value -> String.valueOf(value)
+//        ));
+//
         System.out.println(cmap);
 
         System.out.println(Stream.of("1", "2", "3").collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString());
