@@ -70,27 +70,27 @@ public class FunctionalInfo {
         Supplier<Boolean> condition = () -> true;
         System.out.println(condition.get());
 
-//        System.out.println(FunctionalInfo.convertListToMap(
-//                        q -> q.i != 2, // criteria
-//                        dList,   // input list of objects
-//                        p -> p.i, // key extractor using the input item of dList
-//                        q -> q.j // value extractor using the input item of dList
-//                )
-//        );
+        System.out.println(FunctionalInfo.convertListToMap(
+                        q -> q.i != 2, // criteria
+                        dList,   // input list of objects
+                        p -> p.i, // key extractor using the input item of dList
+                        q -> q.j // value extractor using the input item of dList
+                )
+        );
 
 
-//        String a = dList.stream().filter((obj) -> obj.j != null && obj.j.equalsIgnoreCase("1")).collect(
-//                Collectors.collectingAndThen(
-//                        Collectors.toList(),
-//                        list -> {
-//                            if (list.size() < 1) {
-//                                return null;
-//                            }
-//                            return list.get(0).j;
-//                        }
-//                )
-//        );
-//
+        String a = dList.stream().filter((obj) -> obj.j != null && obj.j.equalsIgnoreCase("1")).collect(
+                Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        list -> {
+                            if (list.size() < 1) {
+                                return null;
+                            }
+                            return list.get(0).j;
+                        }
+                )
+        );
+
 //        System.out.println(a);
 
     }

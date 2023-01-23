@@ -31,19 +31,22 @@ import java.net.URI;
 
 public class LearnApacheHttpClient {
     private static final ObjectMapper mapper;
+    private static RequestConfig config;
 
     static  {
         mapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-    }
-    public static void apiInvocation(RequestBuilder requestBuilder) {
         RequestConfig config = RequestConfig.custom()
                 .setConnectTimeout(5000)
                 .setConnectionRequestTimeout(5000)
                 .setSocketTimeout(20000)
                 .build();
+
+    }
+    public static void apiInvocation(RequestBuilder requestBuilder) {
+
         String acceptCharSet = "UTF-8";
 
         try (final CloseableHttpClient httpclient = HttpClientBuilder.create().setDefaultRequestConfig(config).build()) {
@@ -75,6 +78,7 @@ public class LearnApacheHttpClient {
 
         }
     }
+
 
     public static void performGetOperation() {
         RequestBuilder requestBuilder = RequestBuilder.get().setUri("https://dummyjson.com/products");
