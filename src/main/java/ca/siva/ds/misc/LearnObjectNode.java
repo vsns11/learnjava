@@ -50,8 +50,6 @@ public class LearnObjectNode {
                     }
                 }).collect(Collectors.toList()));
 
-        var siva = "1";
-
         String ans = list.stream()
                     .filter(Objects::nonNull)
                     .sorted((DummyItemValue l, DummyItemValue m)->{
@@ -69,6 +67,18 @@ public class LearnObjectNode {
 
         ArrayNode arr1 = mapper.createArrayNode().add(mapper.createObjectNode().put("sai", "siva"));
         System.out.println(StreamSupport.stream(arr1.spliterator(), false).anyMatch(w1->w1.has("sai")));
+
+        JsonNode newJsonNode = mapper.createObjectNode().put("value", "sai");
+        JsonNode node2 = mapper.createObjectNode().put("key2", newJsonNode.toString());
+        System.out.println(node2);
+        System.out.println(node2.get("key2").asText());
+        System.out.println(node2.get("key2").toString());
+        // Use as Text to get string representation (without "\" in the representation), i.e, needed for the conversion, whereas toString() does the opposite
+        Object o = mapper.readValue(node2.get("key2").asText(), DummyItemValue.class);
+        System.out.println(o);
+        // convert the object to jsonNode
+        System.out.println(mapper.convertValue(o, JsonNode.class));
+
 
 
     }
