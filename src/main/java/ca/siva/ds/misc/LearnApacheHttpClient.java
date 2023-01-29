@@ -5,9 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
-import org.apache.http.HttpHost;
+import org.apache.http.*;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
@@ -20,10 +18,7 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicAuthCache;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.*;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -31,6 +26,8 @@ import java.net.URI;
 
 public class LearnApacheHttpClient {
     private static final ObjectMapper mapper;
+    private static final int MAX_RETRIES = 3;
+    private static final long DELAY = 1000;
     private static RequestConfig config;
 
     static  {
@@ -49,7 +46,30 @@ public class LearnApacheHttpClient {
 
         String acceptCharSet = "UTF-8";
 
-        try (final CloseableHttpClient httpclient = HttpClientBuilder.create().setDefaultRequestConfig(config).build()) {
+        try (final CloseableHttpClient httpclient = HttpClients.custom()
+                                                .addInterceptorLast((HttpResponseInterceptor) (response, context) -> {
+                                                    if (response.getStatusLine().getStatusCode() >= 400) {
+                                                        // Throw an IOException to force a retry via HttpRequestRetryHandler.retryRequest()
+                                                        throw new IOException("Invalid code returned: " + response.getStatusLine().getStatusCode());
+                                                    }
+                                                })
+                                                .setRetryHandler((exception, executionCount, context) -> {
+                                                    if (executionCount > MAX_RETRIES) { // MAX_RETRIES = 3
+                                                        return false;
+                                                    } else {
+                                                        try {
+                                                            // Sleep before retrying
+                                                            Thread.sleep(DELAY); // DELAY = 1000 MS
+                                                        } catch (InterruptedException ex) {
+                                                            // ... Log or silently swallow
+                                                        }
+                                                        return true;
+                                                    }
+                                                })
+
+                .setDefaultRequestConfig(config)
+                                    .build()) {
+
 
             //request
             HttpUriRequest request = requestBuilder.build();
