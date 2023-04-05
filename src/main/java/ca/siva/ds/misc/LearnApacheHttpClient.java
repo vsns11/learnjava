@@ -62,6 +62,7 @@ public class LearnApacheHttpClient {
                                                             Thread.sleep(DELAY); // DELAY = 1000 MS
                                                         } catch (InterruptedException ex) {
                                                             // ... Log or silently swallow
+                                                            Thread.currentThread().interrupt();
                                                         }
                                                         return true;
                                                     }
